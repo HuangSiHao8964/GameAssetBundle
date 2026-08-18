@@ -1,0 +1,196 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9967511188944ac5b4ef5df8be6d9944, type: 3}
+  m_Name: AssetBundleBuildSetting
+  m_EditorClassIdentifier: 
+  m_activeApplicationBuildName: "\u5FEB\u624B\u5185\u7F51"
+  m_applicationProfiles:
+  - m_buildName: "\u5185\u7F51_\u6296\u97F3"
+    m_productName: "\u53CD\u9AA8\u4ED4"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 0
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.3
+    m_versionCode: 14
+  - m_buildName: "\u5185\u7F51_\u8054\u673A_\u5FEB\u624B"
+    m_productName: ks687080418266168930
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 0
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 1
+    m_baseVersion: 1.0.0
+    m_currentVersion: 
+    m_versionCode: 10
+  - m_buildName: "\u5916\u7F51\u6D4B\u8BD5_\u5FEB\u624B"
+    m_productName: "\u5916\u7F51\u6D4B\u8BD5_\u5FEB\u624B"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 1
+    m_baseVersion: 1.0.1
+    m_currentVersion: 
+    m_versionCode: 10
+  - m_buildName: "\u5916\u7F51\u6D4B\u8BD5_\u6296\u97F3"
+    m_productName: "\u5916\u7F51\u6D4B\u8BD5_\u6296\u97F3"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 0
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 1
+    m_baseVersion: 1.0.0
+    m_currentVersion: 
+    m_versionCode: 10
+  - m_buildName: "\u5916\u7F51\u81EA\u6D4B_\u5FEB\u624B"
+    m_productName: "\u5916\u7F51\u81EA\u6D4B_\u5FEB\u624B"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 0
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 1
+    m_baseVersion: 1.0.0
+    m_currentVersion: 
+    m_versionCode: 10
+  - m_buildName: "\u5916\u7F51\u81EA\u6D4B_\u6296\u97F3"
+    m_productName: "\u5916\u7F51\u81EA\u6D4B_\u6296\u97F3"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 0
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.9
+    m_versionCode: 20
+  - m_buildName: "\u5FEB\u624B\u5185\u7F51"
+    m_productName: "\u5FEB\u624B\u5185\u7F51"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 0
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.106
+    m_versionCode: 130
+  - m_buildName: "\u5FEB\u624B\u6B63\u5F0F"
+    m_productName: ks688769271471090036
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.28
+    m_versionCode: 51
+  - m_buildName: "\u5FEB\u624B\u6D4B\u8BD5"
+    m_productName: "\u5FEB\u624B\u6D4B\u8BD5"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.32
+    m_versionCode: 42
+  - m_buildName: "\u5FEB\u624B\u81EA\u6D4B"
+    m_productName: "\u5FEB\u624B\u81EA\u6D4B"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.8
+    m_versionCode: 22
+  - m_buildName: "\u6296\u97F3\u6D4B\u8BD5"
+    m_productName: "\u6296\u97F3\u6D4B\u8BD5"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 1
+    m_baseVersion: 1.0.0
+    m_currentVersion: 
+    m_versionCode: 10
+  - m_buildName: "\u63D0\u5BA1_\u5FEB\u624B"
+    m_productName: ks687080418266168930
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.5
+    m_versionCode: 13
+  - m_buildName: "\u63D0\u5BA1_\u6296\u97F3"
+    m_productName: "\u53CD\u9AA8\u4ED4"
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.5
+    m_versionCode: 13
+  - m_buildName: "\u6B63\u5F0F_\u5FEB\u624B"
+    m_productName: ks687080418266168930
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.5
+    m_currentVersion: 1.0.48
+    m_versionCode: 80
+  - m_buildName: "\u6B63\u5F0F_\u6296\u97F3"
+    m_productName: ttfgz
+    m_buildTarget: 19
+    m_scriptingImplementation: 1
+    m_release: 1
+    m_encryptAssetBundle: 1
+    m_cleanPack: 1
+    m_incrementResourceVersion: 1
+    m_firstPackage: 0
+    m_baseVersion: 1.0.0
+    m_currentVersion: 1.0.21
+    m_versionCode: 36

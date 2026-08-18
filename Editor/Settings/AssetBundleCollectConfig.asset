@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095479d3bf5f4e043ad3dbc8392c6750, type: 3}
+  m_Name: AssetBundleCollectConfig
+  m_EditorClassIdentifier: 
+  collect:
+  - folder: Assets/ABR/UIRes/Prefab
+    type: 3
+    ext: 1
+  - folder: Assets/ABR/Config
+    type: 2
+    ext: 4
+  - folder: Assets/ABR/UIRes/Texture
+    type: 3
+    ext: 0
+  - folder: Assets/ABR/UIRes/Sprite
+    type: 1
+    ext: 8
+  - folder: Assets/ABR/Font
+    type: 1
+    ext: 4
+  - folder: Assets/ABR/SceneRes/Prefab
+    type: 1
+    ext: 1
+  - folder: Assets/ABR/SceneRes/Material
+    type: 2
+    ext: 4
+  - folder: Assets/ABR/HotUpdate
+    type: 2
+    ext: 4
+  - folder: Assets/ABR/DataTable
+    type: 2
+    ext: 4
+  - folder: Assets/ABR/SceneRes/SceneTex
+    type: 2
+    ext: 0
+  - folder: Assets/ABR/Video
+    type: 3
+    ext: 4
+  - folder: Assets/ABR/Sound
+    type: 1
+    ext: 4
+  - folder: Assets/ABR/Wing
+    type: 3
+    ext: 2
+  - folder: Assets/ABR/PlayerBlack
+    type: 3
+    ext: 2
+  - folder: Assets/ABR/SceneRes/HeroIcon
+    type: 2
+    ext: 2
+  - folder: Assets/ABR/ShaderLib
+    type: 3
+    ext: 3

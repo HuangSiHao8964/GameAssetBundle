@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996fd6687f8a47759d894e6e36750886, type: 3}
+  m_Name: setting
+  m_EditorClassIdentifier: 
+  m_assetRecordsFileName: ARecords.json
+  m_mainHybridName: HotUpdate
+  m_hybridFileExtension: .bytes
+  m_hybridDllExtension: .dll
+  m_assetBundleDifference: difference.json
+  m_assetBundleNameMap: AssetBundleNameMap.json
+  m_assetBundleExt: .u
+  m_assetPackFileName: assets.upk
+  m_versionFilename: Version.json
+  m_preloadFile: preload.json
+  m_md5Filename: md5.json
+  m_fileListName: FileList.json
+  m_localAbrPath: ABR

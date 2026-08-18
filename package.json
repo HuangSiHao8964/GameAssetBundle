@@ -1,0 +1,12 @@
+{
+  "name": "com.haofang.game-asset-bundle",
+  "version": "1.0.0",
+  "displayName": "GameAssetBundle",
+  "description": "AssetBundle collection, build, simulation, and path settings tools for the project.",
+  "keywords": [
+    "assetbundle",
+    "unity",
+    "hybridclr"
+  ],
+  "dependencies": {}
+}
