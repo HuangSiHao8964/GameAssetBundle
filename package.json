@@ -8,5 +8,10 @@
     "unity",
     "hybridclr"
   ],
+	"author": {
+		"name": "haofang",
+		"email": "70273604@qq.com",
+		"url": "https://gitee.com/wuhan-will-be-happy_0"
+	},
   "dependencies": {}
 }
