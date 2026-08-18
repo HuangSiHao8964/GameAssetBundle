@@ -1,0 +1,2 @@
+# GameAssetBundle
+自用的一个AssetBundle管理工具插件
