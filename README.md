@@ -2,7 +2,112 @@
 
 `GameAssetBundle` 是项目内的 Unity AssetBundle 资源管线，包含资源采集、AssetBundle 构建、差异包生成、编辑器模拟以及运行时加载和释放能力。
 
-包路径：`Client/LocalPackages/com.haofang.game-asset-bundle`
+## 安装与部署
+
+### 前置条件
+
+- Unity 项目启用 UPM（Package Manager）；
+- 本机安装 Git，并确保 `git` 可从终端和 Unity 进程的 `PATH` 中找到；
+- 项目可以访问 GitHub；私有仓库需要提前配置 HTTPS 凭据或 SSH Key；
+- 先安装 UniTask，再安装 GameAssetBundle；
+- 使用 Git URL 安装时，建议把 `Packages/packages-lock.json` 一并提交到版本库，确保团队成员和 CI 恢复到同一份依赖解析结果。
+
+### 方式一：通过 Unity Package Manager 安装
+
+1. 打开 `Window > Package Manager`。
+2. 点击左上角 `+`，选择 `Add package from git URL...`。
+3. 先安装 UniTask，粘贴官方 UPM Git URL：
+
+   ```text
+   https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11
+   ```
+
+4. 再安装 GameAssetBundle，粘贴：
+
+   ```text
+   https://github.com/HuangSiHao8964/GameAssetBundle.git#main
+   ```
+
+GameAssetBundle 当前仓库没有公开 Release，因此安装 URL 暂时固定到 `main` 分支。正式项目应改用已知提交号或后续发布的 Tag（`#<tag-or-commit>`）固定版本，而不是长期跟随 `main`。
+
+### 方式二：编辑 `Packages/manifest.json`
+
+在项目的 `Packages/manifest.json` 的 `dependencies` 中加入以下条目。JSON 中每个依赖只能出现一次：
+
+```json
+{
+  "dependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
+    "com.haofang.game-asset-bundle": "https://github.com/HuangSiHao8964/GameAssetBundle.git#main"
+  }
+}
+```
+
+如果项目已经存在 `com.cysharp.unitask` 或 `com.haofang.game-asset-bundle`，只修改其版本地址，不要重复添加键。Unity 重新打开项目或刷新 Package Manager 后会解析并下载 Git 依赖。
+
+### 使用方程序集引用
+
+`GameAssetBundle` 运行时 asmdef 的 `autoReferenced` 为 `false`。因此，业务程序集不能只安装包后就直接使用命名空间；使用 `AssetManager`、`AssetBundleManager` 或 `AssetBundleRuntimeContext` 的业务 asmdef 必须在 Inspector 的 `Assembly Definition References` 中显式添加：
+
+```text
+GameAssetBundle
+```
+
+业务代码还需要引用 UniTask 的命名空间：
+
+```csharp
+using Cysharp.Threading.Tasks;
+using GameAssetBundle;
+```
+
+编辑器工具由 `GameAssetBundle.Editor` 程序集提供。它引用运行时程序集并限制在 Unity Editor 平台；运行时 asmdef 不要反向引用 `GameAssetBundle.Editor`。
+
+### 方式三：嵌入为本地包
+
+如果项目需要长期修改 `Resources/setting.asset`、构建 Profile、资源采集配置，或需要在离线环境构建，可以把仓库内容嵌入项目：
+
+1. 将仓库中的包目录复制到项目：
+
+   ```text
+   <UnityProject>/Packages/com.haofang.game-asset-bundle/
+   ```
+
+2. 确认该目录直接包含 `package.json`、`Runtime`、`Editor` 和 `Resources`。
+3. 从 `Packages/manifest.json` 中移除 `com.haofang.game-asset-bundle` 的 Git 依赖，避免同名包同时作为 Git 依赖和嵌入包存在。
+4. 保留 UniTask 依赖，并提交嵌入后的包文件以及 `Packages/packages-lock.json`（如果项目生成了该文件）。
+
+嵌入包由项目源码直接管理，适合需要修改包内配置或临时修复代码的场景。更新上游时应先比较本地改动，再重新同步文件；不要把 `Library/PackageCache` 当作部署目录，也不要直接修改其中的包文件。
+
+### 升级、回滚与卸载
+
+- **升级 UniTask**：在 `manifest.json` 中修改 `com.cysharp.unitask` 的 Tag 或提交号，或在 Package Manager 中重新安装目标 Git URL；升级后检查 `GameAssetBundle.asmdef` 仍能解析 `UniTask`。
+- **升级 GameAssetBundle**：当前使用 `#main` 时，点击 Package Manager 的 `Update`，或改用指定的 Tag/提交号；升级前应检查 `package.json` 的包名没有变化。
+- **回滚**：把 Git URL 的 `#main` 改为已知提交号或已发布 Tag，并同步提交 `Packages/packages-lock.json`。在尚未维护稳定 Release/Tag 时，建议记录可工作的完整提交号。
+- **卸载**：从 `manifest.json` 删除对应依赖，或在 Package Manager 中选择 Remove；同时删除业务 asmdef 对 `GameAssetBundle` 的引用，并清理不再使用的 `using GameAssetBundle` 代码。
+
+### CI 与新机器恢复
+
+CI 或新机器上恢复项目时，应按以下顺序准备：
+
+1. 安装 Git，并验证 `git --version`；
+2. 为私有依赖配置凭据（本仓库当前为公开仓库，不需要额外凭据）；
+3. 保留 `Packages/manifest.json` 和 `Packages/packages-lock.json`；
+4. 先让 Unity 解析 UniTask，再解析 GameAssetBundle；
+5. 等待 Package Manager 完成导入后再执行 Unity 批处理构建。
+
+如果 CI 禁止访问外网，应提前把两个 Git 依赖缓存为本地包或内部镜像，并将 `manifest.json` 改为对应的 `file:` 路径；不要在构建脚本中临时下载未锁定的 `main` 分支。
+
+### 安装后验收
+
+安装完成后，在 Unity 中确认：
+
+- Package Manager 显示 `GameAssetBundle` 和 `UniTask`，且没有 Git/解析错误；
+- `GameAssetBundle.asmdef` 的 `UniTask` 引用解析成功；
+- 使用方 asmdef 已显式引用 `GameAssetBundle`；
+- 菜单 `HaoFangTools/GameAssetBundle` 可见；
+- `Resources/setting.asset` 存在且能被 `Resources.Load("setting")` 读取；
+- Console 没有因程序集缺失导致的编译错误；
+- 完成 `AssetBundleRuntimeContext.Configure(...)`、`AssetManager.Init()` 和 `AssetBundleManager.StartUp()` 的宿主接入后，再进行资源加载验证。
 
 ## 依赖与程序集配置
 
