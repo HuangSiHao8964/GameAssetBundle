@@ -36,7 +36,7 @@ namespace GameAssetBundle.Edit
                 AssetBundleCollectConfigWindow.OpenWindow();
             }
 
-            if (GUILayout.Button("定位包内配置资产"))
+            if (GUILayout.Button("定位项目配置资产"))
             {
                 Selection.activeObject = target;
                 EditorGUIUtility.PingObject(target);
@@ -119,7 +119,7 @@ namespace GameAssetBundle.Edit
             InitializeStyles();
             if (m_Config == null || m_SerializedObject == null || m_RuleList == null)
             {
-                EditorGUILayout.HelpBox("未找到包内资源采集配置资产。", MessageType.Error);
+                EditorGUILayout.HelpBox("未找到项目资源采集配置资产。", MessageType.Error);
                 if (GUILayout.Button("创建配置资产"))
                     ReloadConfig();
                 return;

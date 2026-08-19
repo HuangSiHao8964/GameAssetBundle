@@ -1,16 +1,17 @@
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace GameAssetBundle
 {
     /// <summary>
     /// Project-wide names and extensions used by the asset bundle pipeline.
-    /// The asset is loaded from Resources so the same values are available in
-    /// the editor, standalone player and hot-update runtime.
+    /// The editable asset is editor-only; players use the compiled defaults.
     /// </summary>
-    [CreateAssetMenu(fileName = "setting", menuName = "HaoFangTools/GameAssetBundle/Settings")]
     public sealed class AssetBundleSettings : ScriptableObject
     {
-        public const string ResourcesPath = "setting";
+        public const string ProjectAssetPath = "Assets/Editor/GameAssetBundleSettings.asset";
 
         public const string DefaultAssetRecordsFileName = "ARecords.json";
         public const string DefaultMainHybridName = "HotUpdate";
@@ -46,8 +47,10 @@ namespace GameAssetBundle
         {
             get
             {
+#if UNITY_EDITOR
                 if (s_Instance == null)
-                    s_Instance = Resources.Load<AssetBundleSettings>(ResourcesPath);
+                    s_Instance = AssetDatabase.LoadAssetAtPath<AssetBundleSettings>(ProjectAssetPath);
+#endif
 
                 return s_Instance;
             }

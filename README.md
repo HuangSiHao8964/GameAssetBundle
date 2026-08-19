@@ -19,13 +19,13 @@
 3. 先安装 UniTask，粘贴官方 UPM Git URL：
 
    ```text
-   https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11
+   https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
    ```
 
 4. 再安装 GameAssetBundle，粘贴：
 
    ```text
-   https://github.com/HuangSiHao8964/GameAssetBundle.git#main
+   https://github.com/HuangSiHao8964/GameAssetBundle.git
    ```
 
 GameAssetBundle 当前仓库没有公开 Release，因此安装 URL 暂时固定到 `main` 分支。正式项目应改用已知提交号或后续发布的 Tag（`#<tag-or-commit>`）固定版本，而不是长期跟随 `main`。
@@ -37,7 +37,7 @@ GameAssetBundle 当前仓库没有公开 Release，因此安装 URL 暂时固定
 ```json
 {
   "dependencies": {
-    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.haofang.game-asset-bundle": "https://github.com/HuangSiHao8964/GameAssetBundle.git#main"
   }
 }

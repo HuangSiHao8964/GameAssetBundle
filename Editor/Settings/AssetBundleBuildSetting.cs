@@ -74,10 +74,9 @@ namespace GameAssetBundle.Edit
         }
     }
 
-    [CreateAssetMenu(fileName = "AssetBundleBuildSetting", menuName = "HaoFangTools/GameAssetBundle/Build Setting")]
     public sealed class AssetBundleBuildSetting : ScriptableObject
     {
-        public const string AssetPath = "Packages/com.haofang.game-asset-bundle/Editor/Settings/AssetBundleBuildSetting.asset";
+        public const string AssetPath = GameAssetBundleProjectSettingsPaths.BuildSettingsAssetPath;
 
         [SerializeField] private string m_activeApplicationBuildName = string.Empty;
         [SerializeField] private List<AssetBundleApplicationProfile> m_applicationProfiles = new List<AssetBundleApplicationProfile>();

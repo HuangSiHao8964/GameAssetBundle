@@ -51,7 +51,6 @@ public class AssetBundleCollect
 }
 
 [Serializable]
-[CreateAssetMenu(fileName = "AssetBundleCollectConfig", menuName = "HaoFangTools/GameAssetBundle/资源采集配置")]
 public class AssetBundleCollectConfig : ScriptableObject
 {
     public List<AssetBundleCollect> collect = new List<AssetBundleCollect>();

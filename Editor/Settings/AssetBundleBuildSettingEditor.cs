@@ -120,6 +120,9 @@ namespace GameAssetBundle.Edit
             if (setting != null)
                 return setting;
 
+            if (!GameAssetBundleProjectSettingsPaths.EnsureEditorFolder())
+                return null;
+
             setting = ScriptableObject.CreateInstance<AssetBundleBuildSetting>();
             setting.ResetToDefaults();
             AssetDatabase.CreateAsset(setting, AssetBundleBuildSetting.AssetPath);

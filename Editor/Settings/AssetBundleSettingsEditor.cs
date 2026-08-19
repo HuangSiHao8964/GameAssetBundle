@@ -117,7 +117,7 @@ namespace GameAssetBundle.Edit
             GUILayout.Label(icon, GUILayout.Width(28f), GUILayout.Height(28f));
             EditorGUILayout.LabelField("GameAssetBundle 设置", m_HeaderStyle, GUILayout.Height(28f));
             GUILayout.FlexibleSpace();
-            EditorGUILayout.LabelField("Editor + Runtime", EditorStyles.miniLabel, GUILayout.Width(90f));
+            EditorGUILayout.LabelField("Editor", EditorStyles.miniLabel, GUILayout.Width(90f));
             EditorGUILayout.EndHorizontal();
         }
 
@@ -318,7 +318,7 @@ namespace GameAssetBundle.Edit
 
     internal static class AssetBundleSettingsProvider
     {
-        internal const string SettingsAssetPath = "Packages/com.haofang.game-asset-bundle/Resources/setting.asset";
+        internal const string SettingsAssetPath = GameAssetBundleProjectSettingsPaths.SettingsAssetPath;
 
         [SettingsProvider]
         private static SettingsProvider CreateSettingsProvider()
@@ -350,13 +350,13 @@ namespace GameAssetBundle.Edit
             SettingsService.OpenProjectSettings("Project/GameAssetBundle");
         }
 
-        private static UnityEngine.Object GetOrCreateSettings()
+        internal static UnityEngine.Object GetOrCreateSettings()
         {
             AssetBundleSettings settings = AssetDatabase.LoadAssetAtPath<AssetBundleSettings>(SettingsAssetPath);
             if (settings != null)
                 return settings;
 
-            if (!AssetDatabase.IsValidFolder("Packages/com.haofang.game-asset-bundle/Resources"))
+            if (!GameAssetBundleProjectSettingsPaths.EnsureEditorFolder())
             {
                 Debug.LogError($"GameAssetBundle settings folder is missing: {SettingsAssetPath}");
                 return null;

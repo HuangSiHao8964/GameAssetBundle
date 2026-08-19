@@ -10,7 +10,7 @@ namespace GameAssetBundle.Edit
 {
 public class AssetBundleCollectData
 {
-    public const string ConfigAssetPath = "Packages/com.haofang.game-asset-bundle/Editor/Settings/AssetBundleCollectConfig.asset";
+    public const string ConfigAssetPath = GameAssetBundleProjectSettingsPaths.CollectConfigAssetPath;
 
     private static AssetBundleCollectConfig config = null;
 
@@ -28,12 +28,21 @@ public class AssetBundleCollectData
 
     private static AssetBundleCollectConfig LoadCollectConfig()
     {
-        AssetBundleCollectConfig instance = AssetDatabase.LoadAssetAtPath<AssetBundleCollectConfig>(ConfigAssetPath);
-        if (instance == null)
-        {
-            Debug.LogError($"无法加载AssetBundleCollectConfig: {ConfigAssetPath}. 请确认配置资产存在且已完成导入.");
-        }
+        return GetOrCreateConfig();
+    }
 
+    internal static AssetBundleCollectConfig GetOrCreateConfig()
+    {
+        AssetBundleCollectConfig instance = AssetDatabase.LoadAssetAtPath<AssetBundleCollectConfig>(ConfigAssetPath);
+        if (instance != null)
+            return instance;
+
+        if (!GameAssetBundleProjectSettingsPaths.EnsureEditorFolder())
+            return null;
+
+        instance = ScriptableObject.CreateInstance<AssetBundleCollectConfig>();
+        AssetDatabase.CreateAsset(instance, ConfigAssetPath);
+        AssetDatabase.SaveAssets();
         return instance;
     }
 
