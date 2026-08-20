@@ -38,12 +38,15 @@ GameAssetBundle 当前仓库没有公开 Release，因此安装 URL 暂时固定
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-    "com.haofang.game-asset-bundle": "https://github.com/HuangSiHao8964/GameAssetBundle.git#main"
+    "com.haofang.game-asset-bundle": "https://github.com/HuangSiHao8964/GameAssetBundle.git"
   }
 }
 ```
 
 如果项目已经存在 `com.cysharp.unitask` 或 `com.haofang.game-asset-bundle`，只修改其版本地址，不要重复添加键。Unity 重新打开项目或刷新 Package Manager 后会解析并下载 Git 依赖。
+
+Gitee地址：
+https://gitee.com/wuhan-will-be-happy_0/game-asset-bundle.git
 
 ### 使用方程序集引用
 
@@ -64,7 +67,7 @@ using GameAssetBundle;
 
 ### 方式三：嵌入为本地包
 
-如果项目需要长期修改 `Resources/setting.asset`、构建 Profile、资源采集配置，或需要在离线环境构建，可以把仓库内容嵌入项目：
+如果项目需要长期修改 `Assets/Editor` 下的设置、构建 Profile、资源采集配置，或需要在离线环境构建，可以把仓库内容嵌入项目：
 
 1. 将仓库中的包目录复制到项目：
 
@@ -72,7 +75,7 @@ using GameAssetBundle;
    <UnityProject>/Packages/com.haofang.game-asset-bundle/
    ```
 
-2. 确认该目录直接包含 `package.json`、`Runtime`、`Editor` 和 `Resources`。
+2. 确认该目录直接包含 `package.json`、`Runtime` 和 `Editor`。
 3. 从 `Packages/manifest.json` 中移除 `com.haofang.game-asset-bundle` 的 Git 依赖，避免同名包同时作为 Git 依赖和嵌入包存在。
 4. 保留 UniTask 依赖，并提交嵌入后的包文件以及 `Packages/packages-lock.json`（如果项目生成了该文件）。
 
@@ -105,7 +108,7 @@ CI 或新机器上恢复项目时，应按以下顺序准备：
 - `GameAssetBundle.asmdef` 的 `UniTask` 引用解析成功；
 - 使用方 asmdef 已显式引用 `GameAssetBundle`；
 - 菜单 `HaoFangTools/GameAssetBundle` 可见；
-- `Resources/setting.asset` 存在且能被 `Resources.Load("setting")` 读取；
+- Unity 导入包后自动创建 `Assets/Editor/GameAssetBundleSettings.asset`、`Assets/Editor/GameAssetBundleBuildSettings.asset` 和 `Assets/Editor/GameAssetBundleCollectConfig.asset`；
 - Console 没有因程序集缺失导致的编译错误；
 - 完成 `AssetBundleRuntimeContext.Configure(...)`、`AssetManager.Init()` 和 `AssetBundleManager.StartUp()` 的宿主接入后，再进行资源加载验证。
 
@@ -285,9 +288,9 @@ Bundle 依赖关系来自主 Manifest。`AssetBundleManager.StartUp()` 会先加
 - `HaoFangTools/GameAssetBundle/Build Settings`：应用构建 Profile、目标平台、版本、加密和差异包基线；
 - `HaoFangTools/GameAssetBundle/资源采集/配置窗口`：资源采集规则。
 
-资源采集窗口维护一个有序规则列表。每条规则包含资源目录、打包方式和文件类型；目录无效时窗口会标红，规则顺序会影响采集结果。窗口内的 `添加规则`、`删除规则`、`保存`、`清空` 和 `定位资产` 操作都会直接修改包内的 `AssetBundleCollectConfig.asset`。
+资源采集窗口维护一个有序规则列表。每条规则包含资源目录、打包方式和文件类型；目录无效时窗口会标红，规则顺序会影响采集结果。窗口内的 `添加规则`、`删除规则`、`保存`、`清空` 和 `定位资产` 操作都会直接修改项目 `Assets/Editor/GameAssetBundleCollectConfig.asset`。
 
-默认设置资产位于包的 `Resources/setting.asset`。运行时通过 `Resources.Load("setting")` 读取设置，因此不要随意移动或重命名该资产，除非同时调整代码约定。
+设置资产位于项目的 `Assets/Editor` 目录，缺失时由程序集自动按默认值创建。Game Asset Bundle 的 Player 运行时使用代码内默认值，编辑器构建流程使用项目设置资产。
 
 ### 构建
 
@@ -353,13 +356,12 @@ com.haofang.game-asset-bundle/
 │   ├── Handles/       # AssetManager、AssetHandle、租约和释放逻辑
 │   ├── Integration/   # AssetBundleRuntimeContext 与宿主注入接口
 │   ├── Naming/        # 资源名和扩展名规则
-│   └── Settings/      # 运行时设置和编辑器模拟选项
+│   └── Settings/      # 运行时类型和默认值
 ├── Editor/
 │   ├── Build/         # 采集、构建、构建产物和差异包
 │   ├── Settings/      # 构建设置和采集配置 Inspector
 │   └── Simulation/    # 编辑器模拟和校验菜单
-└── Resources/
-    └── setting.asset  # 默认运行时设置
+└── (项目 Assets/Editor/ 下自动创建三份设置资产)
 ```
 
 ## 常见问题
